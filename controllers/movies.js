@@ -4,7 +4,8 @@ const Movie = require('../models/movie');
 const { NotFoundError, ForbiddenError, ValidationError } = require('../errors');
 
 const getMovies = (req, res, next) => {
-  Movie.find({}).then((movies) => res.status(http2.constants.HTTP_STATUS_OK).send(movies))
+  const owner = req.user._id;
+  Movie.find({ owner }).then((movies) => res.status(http2.constants.HTTP_STATUS_OK).send(movies))
     .catch(next);
 };
 

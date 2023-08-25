@@ -1,4 +1,3 @@
-const isEmail = require('validator/lib/isEmail');
 const mongoose = require('mongoose');
 
 const movieSchema = new mongoose.Schema({
@@ -35,10 +34,7 @@ const movieSchema = new mongoose.Schema({
   thumbnail: {
     type: String,
     required: true,
-    validate: {
-      validator: (v) => isEmail(v),
-      message: 'Неправильный формат почты',
-    },
+    validate: /https?:\/\/(www)?[0-9a-z\-._~:/?#[\]@!$&'()*+,;=%]+#?$/i,
   },
   owner: {
     required: true,
